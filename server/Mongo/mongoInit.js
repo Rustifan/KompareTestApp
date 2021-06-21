@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const mongoInit =()=>
 {
-    const mongoAdress = "mongodb://localhost/compareTestApp"
+    const mongoAdress = process.env.MONGO_CONNECTION || "mongodb://localhost/compareTestApp"
     mongoose.connect(mongoAdress, {useNewUrlParser: true,  useUnifiedTopology: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));

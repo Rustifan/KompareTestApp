@@ -12,7 +12,7 @@ export default function UserListComponent()
 
     return loading ? 
     <LoadingComponent text="Učitavanje korisnika"/> :
-    <Segment style={{width: 400, minHeight: 100, margin:"auto", marginTop: 50}}>
+    <Segment className="usersSegment" style={{maxWidth: 400, minHeight: 100, margin:"auto", marginTop: 50}}>
     
     {users.length !== 0 ? 
     <Item.Group divided>

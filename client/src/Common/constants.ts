@@ -2,3 +2,4 @@ export const userAvatarSrc = "https://upload.wikimedia.org/wikipedia/commons/thu
 
 //change value for testing
 export const loadingLag = 1000; // in ms
+export const baseApiUrl = process.env.REACT_APP_BASE_API_URL || "http://localhost:8000/api";

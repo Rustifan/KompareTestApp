@@ -1,5 +1,6 @@
+const ExpressError = require("../errors/ExpressError");
 const User = require("../models/userModel");
-var mongoose = require('mongoose');
+
 
 module.exports.getUsers = async (req, res)=>
 {

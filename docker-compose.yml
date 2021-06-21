@@ -1,0 +1,29 @@
+version: "2"
+
+services: 
+    mongo:
+        image: mongo
+        restart: always
+        volumes:
+            - ./data-node:/data/db
+        ports:
+            - 27017:27017
+        
+    client:
+        build: ./client/
+        ports: 
+            - "3000:80"
+        depends_on:
+            - server
+        
+    server:
+        build: ./server/
+        ports: 
+            - "8000:8000"
+        depends_on: 
+            - mongo
+        restart: always
+        environment: 
+            - MONGO_CONNECTION=mongodb://mongo/compareTestApp
+        
+        

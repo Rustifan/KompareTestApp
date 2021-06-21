@@ -9,11 +9,20 @@ import NavbarComponent from './Components/Navbar/NavbarComponent';
 import { Route, Switch } from 'react-router-dom';
 import UsersComponent from './Components/Users/UsersComponent';
 import AddUserComponent from './Components/Users/AddUserComponent';
+import ErrorComponent from './Components/Error/ErrorComponent';
+import { history } from '.';
+import { removeError } from './Redux/Actions/ErrorActions';
 
 function App() {
 
-  const usersState = useSelector((state: RootStore)=>state.users)
+  const usersState = useSelector((state: RootStore)=>state.users);
+  const errorState = useSelector((state: RootStore)=>state.errors);
+  const {error} = errorState;
   const dispatch = useDispatch();
+  history.listen(()=>
+  {
+      dispatch(removeError());
+  })
 
   useEffect(()=>
   {   
@@ -28,6 +37,9 @@ function App() {
   return (
     <>
       <NavbarComponent/>
+      {error ? 
+        <ErrorComponent error={error}/> : null
+      }
       <Container>
         <Switch>
           <Route exact path="/" component={UsersComponent}/>

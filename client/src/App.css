@@ -1,0 +1,11 @@
+@media only screen and (max-width: 600px)
+{
+    .usersSegment
+    {
+        width: 80% !important;
+    }
+} 
+
+.errorMessage{
+    white-space: pre-wrap;
+}

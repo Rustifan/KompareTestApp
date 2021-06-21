@@ -1,19 +1,36 @@
 import axios from "axios";
-import { loadingLag } from "../Common/constants";
+import { baseApiUrl, loadingLag } from "../Common/constants";
+import { setError } from "../Redux/Actions/ErrorActions";
 import { User } from "../Redux/Actions/UserActionTypes";
+import store from "../Redux/store";
 
-const instance = axios.create({baseURL: "http://localhost:8000/api"});
+const instance = axios.create({baseURL: baseApiUrl});
 
-//for testing purpose add loading lag
+//for testing purpose add lag in constants.ts
 function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 instance.interceptors.response.use(async (response)=>
 {
-    await sleep(loadingLag);
+    if(process.env.NODE_ENV === "development")
+    {
+        await sleep(loadingLag);
+    }
     return response;
+}, (error)=>
+{
+   
+    if(error.response)
+    {
+        store.dispatch(setError({
+            errorMessage: error.response.data, 
+            status: error.response.status}));
+    }
+    
+    throw(error);
 });
+
 
 const Users = {
     getAll: ()=>instance.get<User[]>("/users").then(respose=>respose.data),

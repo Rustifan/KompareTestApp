@@ -30,8 +30,8 @@ export default function UserItemComponent({ user }: Props) {
     }
 
     return (
-        <Item >
-            <Item.Image size="tiny" src={userAvatarSrc} />
+        <Item>
+            <Item.Image className="userImage" size="tiny" src={userAvatarSrc} />
                 <Item.Content>
                 <Header style={{ marginTop: 10 }} as="h3">
                     {`${user.name} ${user.surname   }`}
